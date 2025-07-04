@@ -1,0 +1,72 @@
+# Database configuration (contains sensitive credentials)
+db_connection.php
+
+# PHP session files
+/sessions/
+*.sess
+
+# PHP error logs
+*.log
+error_log
+php_errors.log
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Backup files
+*.sql.bak
+*.php.bak
+
+# Cache files
+cache/
+*.cache
+
+# Upload directories (if any)
+uploads/
+temp/
+
+# Composer (if using in future)
+vendor/
+composer.lock
+
+# Node modules (if using in future)
+node_modules/
+package-lock.json
+
+# Build directories
+build/
+dist/
+
+# Configuration files with sensitive data
+config.php
+database.php
+connection.php
+
+# Personal notes and documentation
+NOTES.md
+TODO.md
+*.txt 
