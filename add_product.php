@@ -10,21 +10,27 @@ require_once 'db_connection.php';
 
 $suppliers = array();
 $sql = "SELECT SupplierID, SupplierName FROM Suppliers ORDER BY SupplierName";
-$res = $conn->query($sql);
+$suppliers_stmt = $conn->prepare($sql);
+$suppliers_stmt->execute();
+$res = $suppliers_stmt->get_result();
 
 if ($res && $res->num_rows > 0) {
     while ($row = $res->fetch_assoc()) {
         $suppliers[] = $row;
     }
 }
+$suppliers_stmt->close();
 
 $next_id_sql = "SELECT MAX(ProductID) as max_id FROM Product";
-$next_id_result = $conn->query($next_id_sql);
+$next_id_stmt = $conn->prepare($next_id_sql);
+$next_id_stmt->execute();
+$next_id_result = $next_id_stmt->get_result();
 $next_id = 1;
 if ($next_id_result && $next_id_result->num_rows > 0) {
     $row = $next_id_result->fetch_assoc();
     $next_id = ($row['max_id'] ?? 0) + 1;
 }
+$next_id_stmt->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">

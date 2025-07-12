@@ -39,13 +39,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['fetch_product'])) {
 
 $suppliers = [];
 $suppliers_sql = "SELECT SupplierID, SupplierName FROM Suppliers ORDER BY SupplierName";
-$suppliers_result = $conn->query($suppliers_sql);
+$suppliers_stmt = $conn->prepare($suppliers_sql);
+$suppliers_stmt->execute();
+$suppliers_result = $suppliers_stmt->get_result();
 
 if ($suppliers_result && $suppliers_result->num_rows > 0) {
     while ($row = $suppliers_result->fetch_assoc()) {
         $suppliers[] = $row;
     }
 }
+$suppliers_stmt->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">

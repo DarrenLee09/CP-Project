@@ -84,13 +84,16 @@ if (!$result) {
 $suppliers_sql = "SELECT DISTINCT s.SupplierName FROM Suppliers s 
                   INNER JOIN Product p ON s.SupplierID = p.SupplierID 
                   ORDER BY s.SupplierName";
-$suppliers_result = $conn->query($suppliers_sql);
+$suppliers_stmt = $conn->prepare($suppliers_sql);
+$suppliers_stmt->execute();
+$suppliers_result = $suppliers_stmt->get_result();
 $suppliers = [];
 if ($suppliers_result) {
     while ($row = $suppliers_result->fetch_assoc()) {
         $suppliers[] = $row['SupplierName'];
     }
 }
+$suppliers_stmt->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
